@@ -1,0 +1,11 @@
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #0D6EFD;
+    border-radius: 50%;
+    padding: 18px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 6%;
+}

@@ -1,0 +1,238 @@
+.nav-link-custome {
+  color: #003B95;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.nav-link-custome:hover {
+  color: #F97316;
+}
+
+.btn-warning {
+  background-color: #F97316;
+  border-color: #F97316;
+  color: white;
+}
+
+.btn-warning:hover {
+  background-color: #EA580C;
+  border-color: #EA580C;
+  color: white
+}
+
+/* ---------- HERO SECTION ---------- */
+
+.hero-section{
+  background:linear-gradient(90deg,#003B95,#0B5ED7);
+  min-height:400px;
+}
+
+.hero-orange{
+  color:#F97316;
+}
+
+.hero-green{
+  color:#16A34A;
+}
+
+/* ---------- Statistics Section ---------- */
+
+.statistics-section {
+  background-color: #003B95;
+}
+
+.statistics-section h2 {
+  font-size:32px;
+}
+
+.statistics-section p {
+  font-size: 15px;
+}
+
+/* ---------- Why Choose Section ---------- */
+
+.card:hover {
+  transform: translateY(-15px);
+  transition: 0.3s;
+}
+
+/* ---------- Government Section ---------- */
+
+.government-section {
+  background-color: #003B95;
+}
+
+.government-section p {
+  font-size: 15px;
+}
+
+/* ---------- Footer ---------- */
+
+.footer-section {
+  background-color: #001F54;
+}
+
+.footer-link {
+  color: white;
+  cursor: pointer;
+}
+
+.footer-link:hover {
+  color: #F97316;
+}
+
+/* ---------- Navbar ---------- */
+
+.nav-link-custom {
+  color: #003B95;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.nav-link-custom:hover {
+  color: #F97316;
+}
+
+/* Active NavLink */
+
+.active-menu {
+  color: #F97316 !important;
+  border-bottom: 3px solid #F97316;
+}
+
+/* ---------- Student Login ---------- */
+
+.login-section {
+  background-color: #F8FAFC;
+  min-height: 80vh;
+}
+
+.login-section .row {
+  min-height: 550px;
+}
+
+.login-section .form-control {
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.login-section .form-control:focus {
+  border-color: #003B95;
+  box-shadow: 0 0 0 0.2rem rgba(0, 59, 149, 0.2);
+}
+
+/* ---------- Student Dashboard ---------- */
+
+.dashboard-card {
+  transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-8px);
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 576px) {
+
+  .dashboard-card {
+    padding: 20px !important;
+  }
+
+  .dashboard-card i {
+    font-size: 2.2rem !important;
+  }
+
+  .dashboard-card h3 {
+    font-size: 1.8rem;
+  }
+
+}
+
+/* ---------- Student Dashboard ---------- */
+
+.dashboard-page{
+  background:#F4F8FC;
+  min-height:100vh;
+}
+
+.dashboard-sidebar{
+  background:#003B95;
+  min-height:100vh;
+  padding:30px 20px;
+}
+
+.dashboard-link{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:none;
+  border:none;
+  color:white;
+  padding:12px 15px;
+  border-radius:10px;
+  margin-bottom:10px;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.dashboard-link:hover{
+  background:#0B5ED7;
+  color:white;
+}
+
+.logout-btn{
+  background:#DC3545;
+}
+
+.logout-btn:hover{
+  background:#BB2D3B;
+}
+
+.dashboard-content{
+  padding:30px;
+}
+
+.dashboard-card{
+  transition:0.3s;
+}
+
+.dashboard-card:hover{
+  transform:translateY(-8px);
+}
+
+.offcanvas.dashboard-sidebar {
+  background: #003B95;
+  width: 270px;
+}
+
+.offcanvas-body {
+  padding-top: 20px;
+}
+
+.active-dashboard-link {
+  background: #0B5ED7;
+  color: white !important;
+  font-weight: bold;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width:768px){
+
+  .dashboard-sidebar{
+    min-height:auto;
+    padding:20px;
+  }
+
+  .dashboard-content{
+    padding:20px;
+  }
+
+  .dashboard-link{
+    margin-bottom:8px;
+  }
+
+}
