@@ -2,6 +2,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "../services/api";
 import StatCard from "../components/dashboard/StatCard";
+import CertificateTemplateA from "../components/CertificateTemplateA";
+import MarksheetTemplateA from "../components/MarksheetTemplateA";
+import html2pdf from "html2pdf.js";
 
 export default function StudentDashboard() {
 
@@ -20,6 +23,7 @@ export default function StudentDashboard() {
     const [marksheet, setMarksheet] = useState(null);
     const [subjects, setSubjects] = useState([]);
     const [certificate, setCertificate] = useState(null);
+    const [selectedTemplate, setSelectedTemplate] = useState("A");
 
     const dashboardStats = [
         {
@@ -62,33 +66,76 @@ export default function StudentDashboard() {
         navigate("/student-login");
     }
 
-    async function handleCertificateDownload() {
+    const handleCertificateDownload = () => {
 
-        try {
+        const certificateElement = document.getElementById("certificate-a");
 
-            const response = await api.get(
-                "/students/certificate/download/",
-                {
-                    responseType: "blob",
-                }
-            );
-
-            const url = window.URL.createObjectURL(response.data);
-
-            const link = document.createElement("a");
-            link.href = url;
-            link.download = "certificate.pdf";
-            link.click();
-
-            window.URL.revokeObjectURL(url);
-
-        } catch (error) {
-
-            console.log(error);
-
+        if (!certificateElement) {
+            alert("Certificate not found.");
+            return;
         }
 
-    }
+        const options = {
+            margin: 0,
+            filename: `${certificate.student_name}_Certificate.pdf`,
+
+            image: {
+                type: "jpeg",
+                quality: 1,
+            },
+
+            html2canvas: {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: "#ffffff",
+                scrollX: 0,
+                scrollY: 0,
+            },
+
+            jsPDF: {
+                unit: "px",
+                format: [950, 670],
+                orientation: "landscape",
+            },
+        };
+
+        html2pdf().set(options).from(certificateElement).save();
+    };
+
+    const handleMarksheetDownload = () => {
+        const marksheetElement = document.getElementById("marksheet-a");
+
+        if(!marksheetElement) {
+            alert("Marksheet not found.");
+            return;
+        }
+
+        const options = {
+            margin: 0,
+            filename: `${marksheet.student_name}_Marksheet.pdf`,
+
+            image: {
+                type: "jpeg",
+                quality: 1,
+            },
+
+            html2canvas: {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: "#ffffff",
+                scrollX: 0,
+                scrollY: 0,
+            },
+
+            jsPDF: {
+                unit: "px",
+                format: [950, 670],
+                orientation: "landscape",
+            },
+        };
+
+        html2pdf().set(options).from(marksheetElement).save();
+    };
 
     useEffect(() => {
 
@@ -421,85 +468,28 @@ export default function StudentDashboard() {
                         )}
 
                         {activeSection === "marksheet" && marksheet && (
-
                             <div className="card border-0 shadow-sm p-4 mt-4">
 
-                                <h4 className="text-primary mb-4">📄 My Marksheet</h4>
+                                <h4 className="text-primary mb-4">
+                                📄 My Marksheet
+                                </h4>
 
-                                {/* Summary Cards */}
+                                <MarksheetTemplateA marksheet={marksheet} />
 
-                                <div className="row g-3 mb-4">
-
-                                    <div className="col-md-3">
-                                        <div className="border rounded p-3 text-center">
-                                            <small className="text-muted">Exam</small>
-                                            <h6>{marksheet.exam_name}</h6>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-md-3">
-                                        <div className="border rounded p-3 text-center">
-                                            <small className="text-muted">Marks</small>
-                                            <h5 className="text-success">{marksheet.obtained_marks}/{marksheet.total_marks}</h5>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-md-3">
-                                        <div className="border rounded p-3 text-center">
-                                            <small className="text-muted">Percentage</small>
-                                            <h5 className="text-primary">{marksheet.percentage}%</h5>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-md-3">
-                                        <div className="border rounded p-3 text-center">
-                                            <small className="text-muted">Grade</small>
-                                            <h5 className="text-warning">{marksheet.grade}</h5>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                {/* Subject Table */}
-
-                                <div className="table-responsive">
-
-                                    <table className="table table-hover">
-
-                                        <thead className="table-primary">
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Subject</th>
-                                                <th>Marks</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-
-                                            {subjects.map((subject, index) => (
-                                                <tr key={subject.id}>
-                                                    <td>{index + 1}</td>
-                                                    <td>{subject.subject}</td>
-                                                    <td className="fw-bold">{subject.marks}</td>
-                                                </tr>
-                                            ))}
-
-                                        </tbody>
-
-                                    </table>
-
-                                </div>
-
-                                <div className="text-end">
-                                    <button className="btn btn-warning">
+                                <div className="text-end mt-4">
+                                    <button
+                                        className="btn btn-warning"
+                                        onClick={handleMarksheetDownload}
+                                    >
                                         <i className="bi bi-download me-2"></i>
                                         Download Marksheet
                                     </button>
                                 </div>
 
                             </div>
+                            )}
 
-                        )}
+                        {/* ================= CERTIFICATE SECTION START ================= */}
 
                         {activeSection === "certificate" && certificate && (
 
@@ -509,47 +499,163 @@ export default function StudentDashboard() {
                                     🏆 Course Completion Certificate
                                 </h4>
 
-                                <div className="border rounded p-4 bg-light text-center">
+                                {/* Template Selection */}
 
-                                    <h3 className="text-primary fw-bold mb-3">
-                                        Institute Management System
-                                    </h3>
+                                <div className="row g-3">
 
-                                    <p>This Certificate is proudly presented to</p>
+                                    <div className="col-md-6">
 
-                                    <h2 className="text-success fw-bold">
-                                        {certificate.student_name}
-                                    </h2>
+                                        <div
+                                            className={`border rounded p-3 text-center ${
+                                                selectedTemplate === "A"
+                                                    ? "border-success border-3"
+                                                    : ""
+                                            }`}
+                                            style={{ cursor: "pointer" }}
+                                            onClick={() => setSelectedTemplate("A")}
+                                        >
+                                            <h6 className="text-success fw-bold">
+                                                🏆 Template A
+                                            </h6>
 
-                                    <p>for successfully completing</p>
+                                            <small>Course Completion Certificate</small>
 
-                                    <h4 className="text-primary">
-                                        {certificate.course_name}
-                                    </h4>
-
-                                    <hr />
-
-                                    <div className="row text-start">
-
-                                        <div className="col-md-6">
-                                            <p><strong>Certificate ID:</strong> {certificate.certificate_id}</p>
-                                            <p><strong>Grade:</strong> {certificate.grade}</p>
                                         </div>
 
-                                        <div className="col-md-6">
-                                            <p><strong>Status:</strong> {certificate.status}</p>
-                                            <p><strong>Completion Date:</strong> {certificate.completion_date}</p>
+                                    </div>
+
+                                    <div className="col-md-6">
+
+                                        <div
+                                            className={`border rounded p-3 text-center ${
+                                                selectedTemplate === "B"
+                                                    ? "border-primary border-3"
+                                                    : ""
+                                            }`}
+                                            style={{ cursor: "pointer" }}
+                                            onClick={() => setSelectedTemplate("B")}
+                                        >
+                                            <h6 className="text-primary fw-bold">
+                                                ⌨️ Template B
+                                            </h6>
+
+                                            <small>Typing / Skill Certificate</small>
+
                                         </div>
 
                                     </div>
 
                                 </div>
 
+                                {/* Certificate Preview */}
+
+                                <div className="mt-4">
+
+                                    {selectedTemplate === "A" ? (
+
+                                        <CertificateTemplateA certificate={certificate} />
+
+                                    ) : (
+
+                                        <div className="certificate-template">
+
+                                            <div className="certificate-inner-border">
+
+                                                <div className="text-center mb-4">
+
+                                                    <h2 className="text-primary fw-bold">
+                                                        INSTITUTE MANAGEMENT SYSTEM
+                                                    </h2>
+
+                                                    <p className="fw-bold text-primary">
+                                                        TYPING SPEED & ACCURACY CERTIFICATE
+                                                    </p>
+
+                                                    <p className="certificate-id">
+                                                        Certificate No : {certificate.certificate_id}
+                                                    </p>
+
+                                                </div>
+
+                                                <div className="text-center my-5">
+
+                                                    <h2 className="student-name">
+                                                        {certificate.student_name}
+                                                    </h2>
+
+                                                    <p className="mt-3">
+                                                        Successfully completed Typing Examination.
+                                                    </p>
+
+                                                </div>
+
+                                                <table className="table table-bordered text-center">
+
+                                                    <thead className="table-primary">
+
+                                                        <tr>
+                                                            <th>Language</th>
+                                                            <th>Speed (WPM)</th>
+                                                            <th>Accuracy</th>
+                                                            <th>Grade</th>
+                                                        </tr>
+
+                                                    </thead>
+
+                                                    <tbody>
+
+                                                        <tr>
+                                                            <td>English</td>
+                                                            <td>48</td>
+                                                            <td>95%</td>
+                                                            <td>A</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>Hindi</td>
+                                                            <td>45</td>
+                                                            <td>93%</td>
+                                                            <td>A</td>
+                                                        </tr>
+
+                                                    </tbody>
+
+                                                </table>
+
+                                                <div className="row mt-5 text-center">
+
+                                                    <div className="col-md-6 mb-4">
+
+                                                        <div className="signature-line">
+                                                            Center Director
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className="col-md-6 mb-4">
+
+                                                        <div className="signature-line">
+                                                            Managing Director
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    )}
+
+                                </div>
+
+                                {/* Download Button */}
+
                                 <div className="text-end mt-4">
 
-                                    <button className="btn btn-success" onClick={handleCertificateDownload}>
-                                        <i className="bi bi-download me-2"></i>
-                                        Download Certificate
+                                    <button className="btn btn-success px-4 py-2" onClick={handleCertificateDownload}><i className="bi bi-download me-2"></i>
+                                        Download Template {selectedTemplate}
                                     </button>
 
                                 </div>
@@ -557,6 +663,8 @@ export default function StudentDashboard() {
                             </div>
 
                         )}
+
+                        {/* ================= CERTIFICATE SECTION END ================= */}
 
                         {/* Statistics */}
 

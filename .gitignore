@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 *.sqlite3
 .env
+backend/config/settings.py.backup

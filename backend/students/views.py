@@ -1,13 +1,22 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from reportlab.pdfgen import canvas
-from .permissions import IsCenterOwner
+
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.generics import (
+    ListAPIView,
+    CreateAPIView,
+    RetrieveUpdateDestroyAPIView,
+)
 
-# Create your views here.
+from .models import Student
+from .serializers import (
+    CenterStudentSerializer,
+    CenterStudentCreateSerializer,
+)
+from .permissions import IsCenterOwner
+
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
@@ -36,6 +45,7 @@ def student_dashboard(request):
     }
 
     return Response(data)
+
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
@@ -67,6 +77,7 @@ def student_courses(request):
 
     return Response(courses)
 
+
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def student_attendance(request):
@@ -76,32 +87,33 @@ def student_attendance(request):
             "id": 1,
             "date": "20 Sep 2026",
             "subject": "Python Programming",
-            "status": "Present"
+            "status": "Present",
         },
         {
             "id": 2,
             "date": "19 Sep 2026",
             "subject": "Django Framework",
-            "status": "Present"
+            "status": "Present",
         },
         {
             "id": 3,
             "date": "18 Sep 2026",
             "subject": "React.js",
-            "status": "Absent"
+            "status": "Absent",
         },
         {
             "id": 4,
             "date": "17 Sep 2026",
             "subject": "Git & GitHub",
-            "status": "Present"
+            "status": "Present",
         },
     ]
 
     return Response({
         "attendance_percentage": 75,
-        "records": attendance
+        "records": attendance,
     })
+
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
@@ -113,23 +125,24 @@ def student_fees(request):
             "date": "15 Sep 2026",
             "amount": 10000,
             "mode": "UPI",
-            "status": "Success"
+            "status": "Success",
         },
         {
             "id": 2,
             "date": "01 Sep 2026",
             "amount": 10000,
             "mode": "Cash",
-            "status": "Success"
-        }
+            "status": "Success",
+        },
     ]
 
     return Response({
         "total_fee": 35000,
         "paid_amount": 20000,
         "pending_amount": 15000,
-        "history": payment_history
+        "history": payment_history,
     })
+
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
@@ -148,8 +161,9 @@ def student_marksheet(request):
         "obtained_marks": 365,
         "percentage": 91.25,
         "grade": "A+",
-        "subjects": subjects
+        "subjects": subjects,
     })
+
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
@@ -163,43 +177,101 @@ def student_certificate(request):
         "course_name": "Python Full Stack Developer",
         "completion_date": "21 September 2026",
         "grade": "A+",
-        "status": "Issued"
+        "status": "Issued",
     })
+
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def download_certificate(request):
 
     response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = 'attachment; filename="certificate.pdf"'
+
+    response["Content-Disposition"] = (
+        'attachment; filename="certificate.pdf"'
+    )
 
     pdf = canvas.Canvas(response)
 
     pdf.setFont("Helvetica-Bold", 24)
-    pdf.drawCentredString(300, 760, "Institute Management System")
+    pdf.drawCentredString(
+        300,
+        760,
+        "Institute Management System",
+    )
 
     pdf.setFont("Helvetica", 18)
-    pdf.drawCentredString(300, 700, "Course Completion Certificate")
+    pdf.drawCentredString(
+        300,
+        700,
+        "Course Completion Certificate",
+    )
 
     pdf.setFont("Helvetica", 14)
     pdf.drawCentredString(
         300,
         650,
-        f"Presented To: {request.user.username}"
+        f"Presented To: {request.user.username}",
     )
 
     pdf.drawCentredString(
         300,
         620,
-        "Python Full Stack Developer"
+        "Python Full Stack Developer",
     )
 
     pdf.drawCentredString(
         300,
         590,
-        "Completion Date: 21 September 2026"
+        "Completion Date: 21 September 2026",
     )
 
     pdf.save()
 
     return response
+
+
+class CenterStudentListAPIView(ListAPIView):
+
+    serializer_class = CenterStudentSerializer
+    permission_classes = [IsCenterOwner]
+
+    def get_queryset(self):
+
+        center = self.request.user.center
+
+        return Student.objects.filter(
+            center=center
+        ).select_related(
+            "user",
+            "course",
+            "batch",
+            "center",
+        ).order_by(
+            "-created_at"
+        )
+
+
+class CenterStudentCreateAPIView(CreateAPIView):
+
+    serializer_class = CenterStudentCreateSerializer
+    permission_classes = [IsCenterOwner]
+
+
+class CenterStudentDetailAPIView(RetrieveUpdateDestroyAPIView):
+
+    serializer_class = CenterStudentSerializer
+    permission_classes = [IsCenterOwner]
+
+    def get_queryset(self):
+
+        center = self.request.user.center
+
+        return Student.objects.filter(
+            center=center
+        ).select_related(
+            "user",
+            "course",
+            "batch",
+            "center",
+        )

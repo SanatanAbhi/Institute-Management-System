@@ -1,157 +1,154 @@
-.nav-link-custome {
-  color: #003B95;
-  font-weight: 600;
-  font-size: 15px;
+/* ===================================================
+   IMS - GLOBAL STYLESHEET (Production Version)
+   FINAL RESET VERSION
+   Navbar + Hero + Dashboard + Certificate Template A
+   =================================================== */
+
+/* ---------------- GOOGLE FONT ---------------- */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Poppins",sans-serif;
 }
 
-.nav-link-custome:hover {
-  color: #F97316;
+body{
+  background:#F8FAFC;
 }
 
-.btn-warning {
-  background-color: #F97316;
-  border-color: #F97316;
-  color: white;
+/* ===================================================
+   NAVBAR
+   =================================================== */
+
+.nav-link-custom{
+  color:#003B95;
+  font-weight:600;
+  font-size:15px;
+  text-decoration:none;
+  transition:.3s;
 }
 
-.btn-warning:hover {
-  background-color: #EA580C;
-  border-color: #EA580C;
-  color: white
+.nav-link-custom:hover{
+  color:#F97316;
 }
 
-/* ---------- HERO SECTION ---------- */
+.active-menu{
+  color:#F97316 !important;
+  border-bottom:3px solid #F97316;
+}
+
+/* ===================================================
+   BUTTONS
+   =================================================== */
+
+.btn-warning{
+  background:#F97316;
+  border-color:#F97316;
+  color:#fff;
+}
+
+.btn-warning:hover{
+  background:#EA580C;
+  border-color:#EA580C;
+  color:#fff;
+}
+
+/* ===================================================
+   HERO SECTION
+   =================================================== */
 
 .hero-section{
   background:linear-gradient(90deg,#003B95,#0B5ED7);
   min-height:400px;
 }
 
-.hero-orange{
-  color:#F97316;
+.hero-orange{color:#F97316;}
+.hero-green{color:#16A34A;}
+
+/* ===================================================
+   STATISTICS
+   =================================================== */
+
+.statistics-section{
+  background:#003B95;
 }
 
-.hero-green{
-  color:#16A34A;
-}
-
-/* ---------- Statistics Section ---------- */
-
-.statistics-section {
-  background-color: #003B95;
-}
-
-.statistics-section h2 {
+.statistics-section h2{
   font-size:32px;
 }
 
-.statistics-section p {
-  font-size: 15px;
+.statistics-section p{
+  font-size:15px;
 }
 
-/* ---------- Why Choose Section ---------- */
+/* ===================================================
+   CARDS
+   =================================================== */
 
-.card:hover {
-  transform: translateY(-15px);
-  transition: 0.3s;
+.card{
+  transition:.3s;
 }
 
-/* ---------- Government Section ---------- */
-
-.government-section {
-  background-color: #003B95;
+.card:hover{
+  transform:translateY(-10px);
 }
 
-.government-section p {
-  font-size: 15px;
+/* ===================================================
+   GOVERNMENT SECTION
+   =================================================== */
+
+.government-section{
+  background:#003B95;
 }
 
-/* ---------- Footer ---------- */
-
-.footer-section {
-  background-color: #001F54;
+.government-section p{
+  font-size:15px;
 }
 
-.footer-link {
-  color: white;
-  cursor: pointer;
+/* ===================================================
+   FOOTER
+   =================================================== */
+
+.footer-section{
+  background:#001F54;
 }
 
-.footer-link:hover {
-  color: #F97316;
+.footer-link{
+  color:#fff;
 }
 
-/* ---------- Navbar ---------- */
-
-.nav-link-custom {
-  color: #003B95;
-  font-weight: 600;
-  font-size: 15px;
-  text-decoration: none;
-  transition: all 0.3s ease;
+.footer-link:hover{
+  color:#F97316;
 }
 
-.nav-link-custom:hover {
-  color: #F97316;
+/* ===================================================
+   LOGIN PAGE
+   =================================================== */
+
+.login-section{
+  background:#F8FAFC;
+  min-height:80vh;
 }
 
-/* Active NavLink */
-
-.active-menu {
-  color: #F97316 !important;
-  border-bottom: 3px solid #F97316;
+.login-section .row{
+  min-height:550px;
 }
 
-/* ---------- Student Login ---------- */
-
-.login-section {
-  background-color: #F8FAFC;
-  min-height: 80vh;
+.login-section .form-control{
+  padding:12px;
+  border-radius:10px;
 }
 
-.login-section .row {
-  min-height: 550px;
+.login-section .form-control:focus{
+  border-color:#003B95;
+  box-shadow:0 0 0 .2rem rgba(0,59,149,.2);
 }
 
-.login-section .form-control {
-  padding: 12px;
-  border-radius: 10px;
-}
-
-.login-section .form-control:focus {
-  border-color: #003B95;
-  box-shadow: 0 0 0 0.2rem rgba(0, 59, 149, 0.2);
-}
-
-/* ---------- Student Dashboard ---------- */
-
-.dashboard-card {
-  transition: all 0.3s ease;
-}
-
-.dashboard-card:hover {
-  transform: translateY(-8px);
-}
-
-/* Mobile Responsive */
-
-@media (max-width: 576px) {
-
-  .dashboard-card {
-    padding: 20px !important;
-  }
-
-  .dashboard-card i {
-    font-size: 2.2rem !important;
-  }
-
-  .dashboard-card h3 {
-    font-size: 1.8rem;
-  }
-
-}
-
-/* ---------- Student Dashboard ---------- */
+/* ===================================================
+   STUDENT DASHBOARD
+   =================================================== */
 
 .dashboard-page{
   background:#F4F8FC;
@@ -165,22 +162,26 @@
 }
 
 .dashboard-link{
-  display:block;
   width:100%;
-  text-align:left;
+  display:block;
   background:none;
   border:none;
-  color:white;
+  color:#fff;
+  text-align:left;
   padding:12px 15px;
   border-radius:10px;
   margin-bottom:10px;
-  text-decoration:none;
-  transition:0.3s;
+  transition:.3s;
 }
 
 .dashboard-link:hover{
   background:#0B5ED7;
-  color:white;
+}
+
+.active-dashboard-link{
+  background:#0B5ED7;
+  color:#fff !important;
+  font-weight:bold;
 }
 
 .logout-btn{
@@ -196,43 +197,254 @@
 }
 
 .dashboard-card{
-  transition:0.3s;
+  transition:.3s;
 }
 
 .dashboard-card:hover{
   transform:translateY(-8px);
 }
 
-.offcanvas.dashboard-sidebar {
-  background: #003B95;
-  width: 270px;
+.offcanvas.dashboard-sidebar{
+  background:#003B95;
+  width:270px;
 }
 
-.offcanvas-body {
-  padding-top: 20px;
+/* ===================================================
+   CERTIFICATE TEMPLATE A (FINAL FIT)
+   =================================================== */
+
+.certificate-template-a{
+  width:900px;
+  height:635px;
+  margin:20px auto;
+  background:#fff;
+  border:10px solid #39C6D6;
+  border-radius:18px;
+  padding:10px;
+  box-sizing:border-box;
 }
 
-.active-dashboard-link {
-  background: #0B5ED7;
-  color: white !important;
-  font-weight: bold;
+.certificate-inner-border{
+  width:100%;
+  height:100%;
+  border:2px solid #169FB3;
+  border-radius:12px;
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  box-sizing:border-box;
 }
 
-/* ---------- Responsive ---------- */
+/* Header */
 
-@media (max-width:768px){
+.certificate-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-  .dashboard-sidebar{
-    min-height:auto;
-    padding:20px;
+.header-logo-left,
+.header-logo-right{
+  width:60px;
+}
+
+.header-center{
+  flex:1;
+  text-align:center;
+}
+
+.certificate-logo{width:48px;}
+
+.certificate-small-heading{font-size:7px;color:#00838F;}
+.certificate-brand-top{font-size:12px;color:#5B46A8;font-weight:700;margin:0;}
+.certificate-brand-main{font-size:20px;color:#F97316;font-weight:800;margin:0;}
+.certificate-sub-heading{font-size:9px;margin:2px 0;}
+.certificate-iso-text{font-size:7px;color:#00838F;font-weight:600;}
+
+.iso-badge{
+  width:48px;
+  height:48px;
+  border:2px solid #F97316;
+  border-radius:8px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.iso-badge h5{font-size:10px;margin:0;}
+.iso-badge small{font-size:6px;}
+
+.certificate-divider{
+  height:3px;
+  background:#39C6D6;
+  border-radius:10px;
+  margin:6px 0;
+}
+
+.certificate-number-top{
+  text-align:right;
+  color:#003B95;
+  font-size:8px;
+  font-weight:700;
+  margin-bottom:3px;
+}
+
+/* Title */
+
+.certificate-title-box{text-align:center;}
+
+.certificate-main-title{
+  font-size:24px;
+  letter-spacing:3px;
+  color:#7A1F2B;
+  margin:0;
+}
+
+.certificate-course-title{
+  font-size:11px;
+  font-weight:700;
+  color:#7A1F2B;
+}
+
+/* Body */
+
+.certificate-body-section{text-align:center;}
+
+.certificate-body-section p{
+  font-size:9px;
+  margin:2px 0;
+}
+
+.certificate-student-name{
+  font-size:20px;
+  color:#003B95;
+  font-weight:800;
+  margin:3px 0;
+}
+
+.student-name-line{
+  width:170px;
+  height:2px;
+  background:#39C6D6;
+  margin:4px auto;
+}
+
+.certificate-father-name{
+  font-size:13px;
+  font-weight:700;
+}
+
+.certificate-registration{
+  font-size:10px;
+  color:#169FB3;
+  font-weight:700;
+}
+
+.certificate-course-name{
+  font-size:15px;
+  color:#7A1F2B;
+  font-weight:800;
+}
+
+.certificate-performance{
+  font-size:8px;
+  line-height:1.2;
+  color:#555;
+}
+
+/* Table */
+
+.certificate-details-table{
+  margin-top:5px;
+}
+
+.certificate-table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+}
+
+.certificate-table th{
+  background:#39C6D6;
+  color:#fff;
+  border:1px solid #169FB3;
+  padding:3px;
+  font-size:8px;
+}
+
+.certificate-table td{
+  border:1px solid #169FB3;
+  padding:3px;
+  font-size:8px;
+  text-align:center;
+}
+
+.grade-cell{
+  color:#169FB3;
+  font-weight:800;
+}
+
+/* Footer */
+
+.certificate-footer-section{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  margin-top:auto;
+  padding-top:6px;
+}
+
+.signature-box{
+  width:120px;
+  text-align:center;
+}
+
+.signature-line{
+  border-top:2px solid #000;
+  margin-bottom:4px;
+}
+
+.signature-box p{
+  font-size:8px;
+  margin:0;
+}
+
+.certificate-qr-box{
+  text-align:center;
+}
+
+.certificate-qr-box i{
+  font-size:22px;
+  color:#169FB3;
+}
+
+.certificate-qr-box small{
+  display:block;
+  font-size:7px;
+}
+
+.certificate-bottom-strip{
+  background:#39C6D6;
+  color:#fff;
+  border-radius:6px;
+  padding:5px 8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:7px;
+  font-weight:600;
+  margin-top:5px;
+}
+
+/* PDF */
+
+@media print{
+  .certificate-template-a{
+    width:900px;
+    height:635px;
+    margin:0;
+    page-break-inside:avoid;
+    box-shadow:none;
   }
-
-  .dashboard-content{
-    padding:20px;
-  }
-
-  .dashboard-link{
-    margin-bottom:8px;
-  }
-
 }
