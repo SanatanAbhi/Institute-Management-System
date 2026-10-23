@@ -6,51 +6,37 @@ from django.core.management.base import BaseCommand, CommandError
 
 
 class Command(BaseCommand):
-    help = "Safely initialize the production Super Admin account."
+    help = "Create the initial production Super Admin once."
 
     def handle(self, *args, **options):
         if os.getenv("ENABLE_SUPERADMIN_BOOTSTRAP") != "true":
-            raise CommandError(
-                "Super Admin bootstrap is not enabled."
-            )
+            raise CommandError("Bootstrap is not enabled.")
 
         username = os.getenv("BOOTSTRAP_SUPERADMIN_USERNAME")
         password = os.getenv("BOOTSTRAP_SUPERADMIN_PASSWORD")
         email = os.getenv("BOOTSTRAP_SUPERADMIN_EMAIL", "")
 
         if not username or not password:
-            raise CommandError(
-                "Required bootstrap environment variables are missing."
-            )
+            raise CommandError("Bootstrap credentials are missing.")
 
         User = get_user_model()
 
         if User.objects.filter(role="SUPER_ADMIN", is_active=True).exists():
-            self.stdout.write(
-                self.style.WARNING(
-                    "An active Super Admin already exists. No changes made."
-                )
-            )
+            self.stdout.write("An active Super Admin already exists. No changes made.")
             return
 
         if User.objects.filter(username=username).exists():
-            raise CommandError(
-                "That username already exists. Choose a different username."
-            )
+            raise CommandError("The requested username already exists.")
 
-        user = User(
+        user = User.objects.create_superuser(
             username=username,
             email=email,
+            password=password,
             role="SUPER_ADMIN",
-            is_staff=True,
-            is_superuser=True,
-            is_active=True,
         )
-        user.set_password(password)
-        user.save()
 
         self.stdout.write(
             self.style.SUCCESS(
-                "Production Super Admin created successfully."
+                f"Production Super Admin '{user.username}' created."
             )
         )
