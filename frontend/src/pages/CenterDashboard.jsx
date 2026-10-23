@@ -12,7 +12,7 @@
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
 
-            navigate("/", { replace: true });
+            navigate("/center-login", { replace: true });
         }
 
         const menuItems = [
@@ -147,14 +147,14 @@
                 section: "students"
             },
             {
-                title: "Add Course",
+                title: "View Courses",
                 icon: "bi-book",
                 color: "#16A34A",
                 background: "#DCFCE7",
                 section: "courses"
             },
             {
-                title: "Create Batch",
+                title: "View Batches",
                 icon: "bi-collection",
                 color: "#9333EA",
                 background: "#F3E8FF",
@@ -265,9 +265,16 @@
                                 <button
                                     key={item.id}
                                     type="button"
+
                                     onClick={() => {
-                                        if (item.id === "students") {
+                                        if (item.id === "dashboard") {
+                                            setActiveSection("dashboard");
+                                        } else if (item.id === "students") {
                                             navigate("/center-students");
+                                        } else if (item.id === "courses") {
+                                            navigate("/center-courses");
+                                        } else if (item.id === "batches") {
+                                            navigate("/center-batches");
                                         } else if (item.id === "admissions") {
                                             navigate("/center-admissions");
                                         } else if (item.id === "fees") {
@@ -280,10 +287,9 @@
                                             navigate("/center-results");
                                         } else if (item.id === "certificates") {
                                             navigate("/center-certificates");
-                                        } else {
-                                            setActiveSection(item.id);
                                         }
                                     }}
+
                                     className="btn w-100 text-start mb-1"
                                     style={{
                                         backgroundColor:
@@ -737,9 +743,14 @@
 
                                                 <button
                                                     type="button"
+
                                                     onClick={() => {
                                                         if (action.section === "students") {
                                                             navigate("/center-students");
+                                                        } else if (action.section === "courses") {
+                                                            navigate("/center-courses");
+                                                        } else if (action.section === "batches") {
+                                                            navigate("/center-batches");
                                                         } else if (action.section === "fees") {
                                                             navigate("/center-fees");
                                                         } else if (action.section === "attendance") {
@@ -748,10 +759,9 @@
                                                             navigate("/center-exams");
                                                         } else if (action.section === "results") {
                                                             navigate("/center-results");
-                                                        } else {
-                                                            setActiveSection(action.section);
                                                         }
                                                     }}
+
                                                     className="btn w-100 text-start p-3"
                                                     style={{
                                                         backgroundColor: "#FFFFFF",
@@ -840,23 +850,18 @@
                                 key={item.id}
                                 type="button"
                                 className="btn border-0 d-flex flex-column align-items-center"
+
                                 onClick={() => {
-                                    if (item.id === "students") {
+                                    if (item.id === "dashboard") {
+                                        navigate("/center-dashboard");
+                                    } else if (item.id === "students") {
                                         navigate("/center-students");
+                                    } else if (item.id === "courses") {
+                                        navigate("/center-courses");
+                                    } else if (item.id === "batches") {
+                                        navigate("/center-batches");
                                     } else if (item.id === "admissions") {
                                         navigate("/center-admissions");
-                                    } else if (item.id === "fees") {
-                                        navigate("/center-fees");
-                                    } else if (item.id === "attendance") {
-                                        navigate("/center-attendance");
-                                    } else if (item.id === "exams") {
-                                        navigate("/center-exams");
-                                    } else if (item.id === "results") {
-                                        navigate("/center-results");
-                                    } else if (item.id === "certificates") {
-                                        navigate("/center-certificates");
-                                    } else {
-                                        setActiveSection(item.id);
                                     }
                                 }}
                                 style={{

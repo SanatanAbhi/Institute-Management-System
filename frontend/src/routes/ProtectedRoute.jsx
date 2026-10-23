@@ -3,21 +3,34 @@ import { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import api from "../services/api";
 
+
 function getExpectedRole(path) {
     if (path.startsWith("/student")) {
         return "STUDENT";
-    }
-
-    if (path.startsWith("/center")) {
-        return "CENTER";
     }
 
     if (path.startsWith("/super-admin")) {
         return "SUPER_ADMIN";
     }
 
+    if (path === "/courses" || path.startsWith("/courses/") || path === "/batches" || path.startsWith("/batches/")) {
+        return "SUPER_ADMIN";
+    }
+
+    if (
+        path === "/centers" ||
+        path.startsWith("/centers/")
+    ) {
+        return "SUPER_ADMIN";
+    }
+
+    if (path.startsWith("/center")) {
+        return ["CENTER", "SUPER_ADMIN"];
+    }
+
     return null;
 }
+
 
 function getDashboardPath(role) {
     const dashboards = {
@@ -29,17 +42,26 @@ function getDashboardPath(role) {
     return dashboards[role] || null;
 }
 
+
 function getLoginPath(path) {
+    if (
+        path === "/centers" ||
+        path.startsWith("/centers/")
+    ) {
+        return "/super-admin-login";
+    }
+
+    if (path.startsWith("/super-admin") || path === "/courses" || path.startsWith("/courses/") || path === "/batches" || path.startsWith("/batches/")) {
+        return "/super-admin-login";
+    }
+
     if (path.startsWith("/center")) {
         return "/center-login";
     }
 
-    if (path.startsWith("/super-admin")) {
-        return "/super-admin-login";
-    }
-
     return "/student-login";
 }
+
 
 export default function ProtectedRoute({ children }) {
     const location = useLocation();
@@ -133,7 +155,11 @@ export default function ProtectedRoute({ children }) {
         );
     }
 
-    if (userRole !== expectedRole) {
+    const roleAllowed = Array.isArray(expectedRole)
+        ? expectedRole.includes(userRole)
+        : userRole === expectedRole;
+
+    if (!roleAllowed) {
         const dashboard = getDashboardPath(userRole);
 
         if (dashboard) {

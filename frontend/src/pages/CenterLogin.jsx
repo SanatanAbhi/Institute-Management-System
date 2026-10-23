@@ -34,8 +34,6 @@ function handleLogin() {
     })
     .then((response) => {
 
-        console.log("CENTER LOGIN RESPONSE:", response.data);
-
         const accessToken = response.data.access;
         const refreshToken = response.data.refresh;
 
@@ -46,9 +44,6 @@ function handleLogin() {
         return api.get("/students/profile/");
     })
     .then((response) => {
-
-        console.log("CENTER PROFILE RESPONSE:", response.data);
-        console.log("CENTER PROFILE ROLE:", response.data.role);
 
         const role = response.data.role;
 
@@ -65,10 +60,6 @@ function handleLogin() {
         }
     })
     .catch((error) => {
-
-        console.log("CENTER LOGIN ERROR:", error);
-        console.log("ERROR RESPONSE:", error.response?.data);
-        console.log("STATUS:", error.response?.status);
 
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");

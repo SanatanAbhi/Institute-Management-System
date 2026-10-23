@@ -10,6 +10,7 @@ import CenterModuleLayout from "./CenterModuleLayout";
 
 import StudentDashboard from "../pages/StudentDashboard";
 import CenterDashboard from "../pages/CenterDashboard";
+import Centers from "../pages/Centers";
 import CenterStudents from "../pages/CenterStudents";
 import CenterAdmissions from "../pages/CenterAdmissions";
 import CenterFees from "../pages/CenterFees";
@@ -20,6 +21,10 @@ import CenterCertificates from "../pages/CenterCertificates";
 import ApplyNow from "../pages/ApplyNow";
 import SuperAdminDashboard from "../pages/SuperAdminDashboard";
 import SuperAdminUsers from "../pages/SuperAdminUsers";
+import SuperAdminCourses from "../pages/SuperAdminCourses";
+import SuperAdminBatches from "../pages/SuperAdminBatches";
+import CenterCourses from "../pages/CenterCourses";
+import CenterBatches from "../pages/CenterBatches";
 
 
 export default function AppRoutes() {
@@ -127,6 +132,27 @@ export default function AppRoutes() {
                 }
             />
 
+            <Route
+                path="/center-courses"
+                element={
+                    <ProtectedRoute>
+                        <CenterModuleLayout>
+                            <CenterCourses />
+                        </CenterModuleLayout>
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/center-batches"
+                element={
+                    <ProtectedRoute>
+                        <CenterModuleLayout>
+                            <CenterBatches />
+                        </CenterModuleLayout>
+                    </ProtectedRoute>
+                }
+            />
 
             {/* Results has its own Back button */}
             <Route
@@ -149,6 +175,14 @@ export default function AppRoutes() {
                 }
             />
             <Route
+                path="/centers"
+                element={
+                    <ProtectedRoute>
+                        <Centers />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
                 path="/super-admin-dashboard"
                 element={
                     <ProtectedRoute>
@@ -162,6 +196,24 @@ export default function AppRoutes() {
                 element={
                     <ProtectedRoute>
                         <SuperAdminUsers />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/super-admin-courses"
+                element={
+                    <ProtectedRoute>
+                        <SuperAdminCourses />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/super-admin-batches"
+                element={
+                    <ProtectedRoute>
+                        <SuperAdminBatches />
                     </ProtectedRoute>
                 }
             />

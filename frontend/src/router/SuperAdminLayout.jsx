@@ -16,13 +16,73 @@ export default function SuperAdminLayout({ active, children }) {
             icon: "bi-people",
             path: "/super-admin-users",
         },
+        {
+            id: "centers",
+            label: "Training Centers",
+            icon: "bi-building",
+            path: "/centers",
+        },
+        {
+            id: "students",
+            label: "Students",
+            icon: "bi-mortarboard",
+            path: "/center-students",
+        },
+        {
+            id: "courses",
+            label: "Courses",
+            icon: "bi-book",
+            path: "/super-admin-courses",
+        },
+        {
+            id: "batches",
+            label: "Batches",
+            icon: "bi-collection",
+            path: "/super-admin-batches",
+        },
+        {
+            id: "admissions",
+            label: "Admissions",
+            icon: "bi-person-plus",
+            path: "/center-admissions",
+        },
+        {
+            id: "fees",
+            label: "Fees",
+            icon: "bi-currency-rupee",
+            path: "/center-fees",
+        },
+        {
+            id: "attendance",
+            label: "Attendance",
+            icon: "bi-calendar-check",
+            path: "/center-attendance",
+        },
+        {
+            id: "exams",
+            label: "Exams",
+            icon: "bi-pencil-square",
+            path: "/center-exams",
+        },
+        {
+            id: "results",
+            label: "Results",
+            icon: "bi-bar-chart",
+            path: "/center-results",
+        },
+        {
+            id: "certificates",
+            label: "Certificates",
+            icon: "bi-award",
+            path: "/center-certificates",
+        },
     ];
 
     function handleLogout() {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
 
-        navigate("/", { replace: true });
+        navigate("/super-admin-login", { replace: true });
     }
 
     return (
@@ -38,6 +98,8 @@ export default function SuperAdminLayout({ active, children }) {
                     backgroundColor: "#111827",
                     color: "#FFFFFF",
                     zIndex: 1000,
+                    overflowY: "auto",
+                    overflowX: "hidden",
                 }}
             >
                 <div
@@ -199,12 +261,20 @@ export default function SuperAdminLayout({ active, children }) {
                     className="d-lg-none position-fixed bottom-0 start-0 end-0 bg-white border-top"
                     style={{ zIndex: 1000 }}
                 >
-                    <div className="d-flex justify-content-around py-2">
+                    <div
+                    className="d-flex py-2"
+                    style={{
+                        overflowX: "auto",
+                        overflowY: "hidden",
+                        whiteSpace: "nowrap",
+                        WebkitOverflowScrolling: "touch",
+                    }}
+                >
                         {menuItems.map((item) => (
                             <button
                                 key={item.id}
                                 type="button"
-                                className="btn border-0 d-flex flex-column align-items-center"
+                                className="btn border-0 d-flex flex-column align-items-center flex-shrink-0"
                                 style={{
                                     color:
                                         active === item.id
@@ -214,10 +284,16 @@ export default function SuperAdminLayout({ active, children }) {
                                 onClick={() => navigate(item.path)}
                             >
                                 <i className={`bi ${item.icon} fs-5`}></i>
-                                <small style={{ fontSize: "11px" }}>
-                                    {item.label === "Overview"
-                                        ? "Home"
-                                        : "Users"}
+                                <small
+                                    style={{
+                                        fontSize: "11px",
+                                        maxWidth: "65px",
+                                        overflow: "hidden",
+                                        textOverflow: "ellipsis",
+                                        whiteSpace: "nowrap",
+                                    }}
+                                >
+                                    {item.label === "Overview" ? "Home" : item.label}
                                 </small>
                             </button>
                         ))}
