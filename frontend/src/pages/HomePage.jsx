@@ -11,6 +11,7 @@ import SuccessStories from "./SuccessStories";
 import EventsSection from "./EventsSection";
 import GallerySection from "./GallerySection";
 import DownloadsSection from "./DownloadsSection";
+import PublicCenters from "./PublicCenters";
 
 export default function HomePage() {
 
@@ -24,7 +25,7 @@ export default function HomePage() {
 
             <PopularCourses />
             <WhyChooseSection />
-            <Centers />
+            <PublicCenters />
             <GovernmentPartners />
 
             <SuccessStories />

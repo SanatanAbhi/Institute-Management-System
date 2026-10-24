@@ -280,7 +280,7 @@ async function handleUpdateCenter(event) {
                         </h5>
                     </div>
 
-                    <div className="card-body p-4">
+                    <div className="card-body p-3 p-md-4">
                         {formError && (
                             <div className="alert alert-danger" role="alert">
                                 {formError}
@@ -560,7 +560,7 @@ async function handleUpdateCenter(event) {
                                     />
                                 </div>
 
-                                <div className="col-12 mt-4">
+                                <div className="col-12 mt-4 d-grid d-sm-flex">
                                     <button
                                         type="submit"
                                         className="btn btn-primary"
@@ -597,7 +597,7 @@ async function handleUpdateCenter(event) {
                         aria-modal="true"
                         style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
                     >
-                        <div className="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                        <div className="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable mx-2 mx-sm-auto">
                             <div className="modal-content">
                                 <div className="modal-header bg-primary text-white">
                                     <h5 className="modal-title">Edit Training Center</h5>

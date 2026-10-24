@@ -43,12 +43,12 @@ export default function CenterCard(props) {
                     />
                 </div>
 
-                <div className="card-body text-center">
+                <div className="card-body text-center d-flex flex-column">
                     <h5 className="fw-bold text-primary">
                         {props.center_name}
                     </h5>
 
-                    <span className="badge bg-warning text-dark mb-3">
+                    <span className="badge bg-warning text-dark mb-3 w-auto m-auto">
                         {props.center_code}
                     </span>
 
@@ -57,7 +57,7 @@ export default function CenterCard(props) {
                         {props.city}, {props.state}
                     </p>
 
-                    <div className="d-grid gap-2">
+                    <div className="d-grid gap-2 mt-auto pt-3">
                         <button
                             type="button"
                             className="btn btn-outline-primary"
@@ -90,7 +90,7 @@ export default function CenterCard(props) {
                     onClick={closeDetails}
                 >
                     <div
-                        className="modal-dialog modal-dialog-centered modal-lg"
+                        className="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable mx-2 mx-sm-auto"
                         role="document"
                     >
                         <div

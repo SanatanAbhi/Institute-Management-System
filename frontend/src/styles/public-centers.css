@@ -1,0 +1,115 @@
+
+.public-center-card {
+    overflow: hidden;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 5px 22px rgba(22, 55, 95, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.public-center-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 32px rgba(22, 55, 95, 0.15);
+}
+
+.public-center-logo-area {
+    position: relative;
+    min-height: 210px;
+    padding: 45px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #edf5ff, #f8fbff);
+    border-bottom: 1px solid #e7eef8;
+}
+
+.public-center-label {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #ffffff;
+    color: #2459a6;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+
+.public-institute-logo {
+    width: 62px;
+    height: 58px;
+    object-fit: contain;
+}
+
+.public-uploaded-logo {
+    width: 100%;
+    max-width: 180px;
+    height: 75px;
+    object-fit: contain;
+}
+
+.public-center-name {
+    margin-bottom: 16px;
+    color: #183b70;
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    font-weight: 700;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.public-center-location {
+    display: flex;
+    align-items: flex-start;
+    gap: 2px;
+    margin-bottom: 14px;
+    color: #5e6b7d;
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.public-center-location i {
+    margin-top: 3px;
+    color: #e49a21;
+}
+
+.public-center-code {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    padding: 7px 11px;
+    border-radius: 8px;
+    background: #f0f5ff;
+    color: #2459a6;
+    font-size: 0.82rem;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.public-center-divider {
+    height: 1px;
+    margin: 20px 0 16px;
+    background: #edf0f5;
+}
+
+@media (max-width: 575.98px) {
+    .public-center-logo-area {
+        min-height: 185px;
+    }
+
+    .public-center-card:hover {
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .public-center-card {
+        transition: none;
+    }
+
+    .public-center-card:hover {
+        transform: none;
+    }
+}
